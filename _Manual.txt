@@ -1,0 +1,7 @@
+Install
+1. Download Node.js https://nodejs.org/en
+2. terminal
+    npm create vite@latest
+
+Run : npm run dev
+Build : npm run build

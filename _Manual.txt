@@ -2,6 +2,19 @@ Install
 1. Download Node.js https://nodejs.org/en
 2. terminal
     npm create vite@latest
+3. Plugin
+    material ui
+        npm install @mui/material @emotion/react @emotion/styled
+
+        // Logo
+        npm install @mui/icons-material
+    Router
+        npm install react-router-dom
+
+
 
 Run : npm run dev
 Build : npm run build
+
+Short create
+    Default export page - rfce

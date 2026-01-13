@@ -1,10 +1,11 @@
 import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material"
-
+import "./AppBarTop.css"
 
 function AppBarTop() {
     const pages = [
-        { name: "Game", title: "Game", link: "/Game" },
-        { name: "Profile", title: "Profile", link: "/Profile" }];
+        { name: "Review", title: "Review", link: "/Review" },
+        // { name: "Profile", title: "Profile", link: "/Profile" }
+        ];
 
     return (
         <AppBar position="static">
@@ -18,8 +19,8 @@ function AppBarTop() {
                 </Box>
                 <Box sx={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: 2 }}>
                     {pages.map((page) => (
-                        <Button color="inherit" key={page.name} href={page.link}>
-                            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                        <Button className="nav-button" color="inherit" key={page.name} href={page.link}>
+                            <Typography variant="h6" component="div" sx={{ flexGrow: 1,textTransform:'none' }}>
                                 {page.title}
                             </Typography>
                         </Button>

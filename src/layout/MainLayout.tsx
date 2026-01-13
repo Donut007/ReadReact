@@ -1,5 +1,5 @@
 import { Box, Card, CardContent } from "@mui/material"
-import AppBarTop from "../components/AppBarTop"
+import AppBarTop from "../components/AppBarTop/AppBarTop"
 import { Outlet } from "react-router-dom"
 import HeaderTop from "../components/HeaderTop"
 import AppBarFooter from "../components/AppBarFooter"

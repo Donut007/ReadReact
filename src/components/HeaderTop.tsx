@@ -5,7 +5,6 @@ function HeaderTop() {
     const matches = useMatches();
     const current = matches.find((m) => (m.handle as { title?: string } | undefined)?.title);
 
-    console.log("Current Pathname:", matches[0]?.pathname);
     return (
         <Box sx={{ textAlign: 'center', marginBottom: 2,backgroundColor:'secondary.main',color:'text.secondary',padding:10}}>
             <Typography variant="h3" component="div" sx={{fontSize:50}}>

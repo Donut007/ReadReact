@@ -1,41 +1,25 @@
-
-import { supabase } from '../../supabaseClient'
-import { useState, useEffect } from 'react'
-
-type User = {
-  ID: number
-  Name: string
-}
+import { useEffect, useState } from "react";
+import { getUsers } from "../../Services/User";
+import type { TB_M_User } from "../../Models/TB_M_User";
 
 function HomePage() {
-  const [users, setUsers] = useState<User[]>([])
+  const [users, setUsers] = useState<TB_M_User[]>([]);
 
   useEffect(() => {
-    const fetchUsers = async () => {
-      const { data, error } = await supabase
-        .from('TB_M_User')
-        .select('*')
+    getUsers().then(setUsers);
+  }, []);
 
-      if (error) {
-        console.error(error)
-      } else {
-        setUsers(data)
-      }
-    }
-
-    fetchUsers()
-  }, [])
-  
   return (
-    <div>Home
+    <div>
+      Home
       <div>
         <h1>Supabase Users</h1>
-        {users.map(u => (
-          <div key={u.ID}>{u.Name}</div>
+        {users.map((user) => (
+          <div key={user.ID}>{user.Name}</div>
         ))}
       </div>
     </div>
-  )
+  );
 }
 
-export default HomePage
+export default HomePage;

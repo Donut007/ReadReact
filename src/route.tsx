@@ -1,9 +1,9 @@
 // routes.tsx
 
-import MainLayout from "../layout/MainLayout";
-import ReviewMain from "../Pages/Review/ReviewMain";
-import HomePage from "../Pages/Home/HomePage";
-import Profile from "../Pages/Profile/Profile";
+import MainLayout from "./layout/MainLayout";
+import ReviewMain from "./Pages/Review/ReviewMain";
+import HomePage from "./Pages/Home/HomePage";
+import Profile from "./Pages/Profile/Profile";
 
 
 export const routes = [

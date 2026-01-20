@@ -6,12 +6,13 @@ export const signUp = async (username: string, password: string, email: string) 
         password
     });
 
-    if (error) return { error };
+    if (error) throw error
 
     // store username
     await supabase.from("TB_M_User").insert({
         ID: data.user?.id,
         UserName: username,
+        Email: email
     });
 
     return { data };
@@ -27,27 +28,36 @@ export const signIn = async (
     if (!identifier.includes('@')) {
         const { data, error } = await supabase
             .from('TB_M_User')
-            .select('ID')
+            .select('Email')
             .eq('UserName', identifier)
             .single()
-
         if (error || !data) {
-            return { error: { message: 'User not found' } }
+            throw error || new Error('User not found')
         }
 
-        // get email from auth.users
-        const { data: userData } =
-            await supabase.auth.admin.getUserById(data.ID)
-            
-        email = userData.user?.email ?? ''
+        email = data.Email
     }
-
-    return supabase.auth.signInWithPassword({
+    await supabase.auth.signInWithPassword({
         email,
         password,
     })
+    return { message: "Sign in successful" }
 };
 
 export const signOut = async () => {
     return await supabase.auth.signOut();
 };
+
+export const getCurrentUser = async () => {
+    const { data:userData } = await supabase.auth.getUser()
+    const userId = userData.user?.id
+
+    const { data, error } = await supabase
+        .from('TB_M_User')
+        .select('UserName')
+        .eq('ID', userId)
+        .maybeSingle()
+
+    if (error) throw error
+    return data?.UserName ?? null
+}

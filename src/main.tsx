@@ -2,7 +2,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { createTheme, CssBaseline, GlobalStyles, ThemeProvider } from '@mui/material'
-import { routes } from './components/route.tsx'
+import { routes } from './route.tsx'
 import './index.css'
 
 // #9ECAD6
@@ -20,10 +20,10 @@ const theme = createTheme({
     background: {
       default: "#FFEAEA"
     },
-    text: {
-      primary: "#333333",
-      secondary: "#ffffffff"
-    }
+    // text: {
+    //   primary: "#333333",
+    //   secondary: "#ffffffff"
+    // }
   }
 })
 

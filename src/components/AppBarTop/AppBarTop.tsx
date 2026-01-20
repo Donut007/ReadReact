@@ -3,14 +3,25 @@ import "./AppBarTop.css"
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useState } from "react";
 import LoginModal from "../LoginModal";
+import { getCurrentUser, signOut } from "../../Services/auth.service";
+import LogoutIcon from '@mui/icons-material/Logout';
 
 function AppBarTop() {
-    const [open, setOpen] = useState(false);
-
+    const [isOpen_Login, setOpenLogin] = useState(false);
+    const [user, setUser] = useState("");
+    const [loading, setLoading] = useState(false);
+    
     const pages = [
         { name: "Review", title: "Review", link: "/Review" },
         // { name: "Profile", title: "Profile", link: "/Profile" }
     ];
+    function fetchUser() {
+        getCurrentUser().then(username => {
+            setUser(username ? username : "");
+        })
+    }
+
+    fetchUser();
 
     return (
         <>
@@ -33,13 +44,29 @@ function AppBarTop() {
                         ))}
                     </Box>
                     <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                        <IconButton onClick={() => setOpen(true)}>
+                        <Typography>{user}</Typography>
+                        <IconButton onClick={() => setOpenLogin(true)}>
                             <AccountCircleIcon sx={{ fontSize: 40, color: "black" }} />
+                        </IconButton>
+                        <IconButton onClick={() => {
+                            signOut()
+                            setUser("");
+                        }}>
+                            <LogoutIcon sx={{ fontSize: 40, color: "black" }} />
                         </IconButton>
                     </Box>
                 </Toolbar>
             </AppBar>
-            <LoginModal open={open} onClose={() => setOpen(false)}></LoginModal>
+
+            <LoginModal open={isOpen_Login} onClose={(isLogin) => {
+                setOpenLogin(false);
+                if (isLogin) {
+                    getCurrentUser().then(username => {
+                        setUser(username ? username : "");
+                    })
+                }
+
+            }}></LoginModal>
         </>
     )
 }

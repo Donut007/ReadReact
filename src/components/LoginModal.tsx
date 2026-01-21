@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import { signIn } from "../Services/auth.service";
 import { useEffect, useState } from "react";
 import SignUpBox from "./SignUpBox";
-import { blue } from "@mui/material/colors";
 
 interface LoginModalProps {
     open: boolean;

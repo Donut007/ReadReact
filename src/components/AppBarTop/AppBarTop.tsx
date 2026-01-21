@@ -5,19 +5,21 @@ import { useState } from "react";
 import LoginModal from "../LoginModal";
 import { getCurrentUser, signOut } from "../../Services/auth.service";
 import LogoutIcon from '@mui/icons-material/Logout';
+import ConfirmDialog from "../ConfirmDialog";
 
 function AppBarTop() {
     const [isOpen_Login, setOpenLogin] = useState(false);
+    const [isOpen_Confirm, setOpenConfirm] = useState(false);
     const [user, setUser] = useState("");
-    const [loading, setLoading] = useState(false);
-    
-    const pages = [
-        { name: "Review", title: "Review", link: "/Review" },
-        // { name: "Profile", title: "Profile", link: "/Profile" }
-    ];
+
+    // const pages = [
+    //     //{ name: "Review", title: "Review", link: "/Review" },
+    //     // { name: "Profile", title: "Profile", link: "/Profile" }
+    // ];
     function fetchUser() {
         getCurrentUser().then(username => {
-            setUser(username ? username : "");
+            const user = username ? username : ""
+            setUser(user);
         })
     }
 
@@ -35,13 +37,13 @@ function AppBarTop() {
                         </Button>
                     </Box>
                     <Box sx={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: 2 }}>
-                        {pages.map((page) => (
+                        {/* {pages.map((page) => (
                             <Button className="nav-button" color="inherit" key={page.name} href={page.link}>
                                 <Typography variant="h6" component="div" sx={{ flexGrow: 1, textTransform: 'none' }}>
                                     {page.title}
                                 </Typography>
                             </Button>
-                        ))}
+                        ))} */}
                     </Box>
                     <Box sx={{ display: 'flex', alignItems: 'center' }}>
                         <Typography>{user}</Typography>
@@ -49,9 +51,8 @@ function AppBarTop() {
                             <AccountCircleIcon sx={{ fontSize: 40, color: "black" }} />
                         </IconButton>
                         <IconButton onClick={() => {
-                            signOut()
-                            setUser("");
-                        }}>
+                            setOpenConfirm(true);
+                        }} sx={{ display: user == "" ? "none" : "block" }}>
                             <LogoutIcon sx={{ fontSize: 40, color: "black" }} />
                         </IconButton>
                     </Box>
@@ -67,6 +68,15 @@ function AppBarTop() {
                 }
 
             }}></LoginModal>
+
+            <ConfirmDialog open={isOpen_Confirm} onClose={(isOk) => {
+                setOpenConfirm(false);
+                if (isOk) {
+                    signOut()
+                    setUser("");
+                }
+
+            }}></ConfirmDialog>
         </>
     )
 }

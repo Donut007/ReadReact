@@ -51,7 +51,8 @@ export const signOut = async () => {
 export const getCurrentUser = async () => {
     const { data:userData } = await supabase.auth.getUser()
     const userId = userData.user?.id
-
+    if (!userId) return null
+    
     const { data, error } = await supabase
         .from('TB_M_User')
         .select('UserName')

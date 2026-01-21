@@ -30,8 +30,8 @@ const theme = createTheme({
 const router = createBrowserRouter(routes);
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <ThemeProvider theme={theme}>
       <CssBaseline />
+    <ThemeProvider theme={theme}>
       {/* Optional fallback to force body color if something overrides it */}
       <GlobalStyles styles={(theme) => ({ body: { backgroundColor: theme.palette.background.default } })} />
       <RouterProvider router={router} />

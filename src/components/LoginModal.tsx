@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { signIn } from "../Services/auth.service";
 import { useEffect, useState } from "react";
 import SignUpBox from "./SignUpBox";
+import { blue } from "@mui/material/colors";
 
 interface LoginModalProps {
     open: boolean;
@@ -96,7 +97,7 @@ export default function LoginModal({
 
                                 // }, 1000);
                             }}
-                            >sign up</Button>
+                            sx={{color:"blue"}}>sign up</Button>
                         </Box>
                         <Box sx={{ mt: 2 }}>
                             <Button type="submit" variant="contained" form="LoginForm" sx={{ textAlign: "center", color: "white", fontSize: "18px" }} fullWidth>

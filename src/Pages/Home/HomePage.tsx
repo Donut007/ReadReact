@@ -1,5 +1,7 @@
-import PhaserGame from "../../components/PhaserGame";
 
+import { Box } from "@mui/material";
+import PhaserGame from "../../components/PhaserGame";
+import "./CardGame.css"
 
 
 function HomePage() {
@@ -8,7 +10,9 @@ function HomePage() {
 
   return (
     <>
-      <PhaserGame />
+      <Box>
+        <PhaserGame />
+      </Box>
     </>
   );
 }

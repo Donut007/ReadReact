@@ -1,16 +1,30 @@
 import Phaser from "phaser";
+import Box from "./Box";
 
-// import HimekoImg from '../assets/Himeko.png';
 export default class MainScene extends Phaser.Scene {
+  boxes: Box[] = [];
+  boxGroup!: Phaser.GameObjects.Group;
+
   constructor() {
-    super("MainScene");
+    super("GameScene");
   }
 
-  preload() {
-    // this.load.image("Himeko", HimekoImg);
+  create(): void {
+    this.boxGroup = this.add.group({
+      classType: Box,
+      runChildUpdate: true
+    });
+
+    for (let i = 0; i < 10; i++) {
+      this.boxGroup.add(
+        new Box(this, 100 + i * 60, 300)
+      );
+    }
   }
 
-  create() {
-    // this.add.image(400, 300, "Himeko");
+  update(): void {
+    // (this.boxGroup.getChildren() as Box[]).forEach(box => {
+    //   box.update();
+    // });
   }
 }

@@ -12,7 +12,7 @@ function MainLayout() {
             <HeaderTop />
             <Box sx={{ gap: 2,margin: 2, display: 'flex', flexDirection: 'column' }}>
                 <Card>
-                    <CardContent sx={{height:"100vh"}}>
+                    <CardContent sx={{minHeight: '600px'}}>
                         <Outlet />
                     </CardContent>
                 </Card>
